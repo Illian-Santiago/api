@@ -1,16 +1,20 @@
+// Dependencias
 const express = require('express')
 const logger = require('morgan')
 const errorhandler = require('errorhandler')
 const bodyParser = require('body-parser')
+
+// Almacen local
 let store = {}
-let app = express()
-
-
 store.accounts = []
+
+// Middleware
+let app = express()
 app.use(bodyParser.json())
 app.use(logger('dev'))
 app.use(errorhandler())
 
+// Rutas
 app.get('/accounts', (req, res) => {
     res.status(200).send(store.accounts)
 })
@@ -32,4 +36,5 @@ app.delete('/accounts/:id', (req, res) => {
     res.status(204).send()
 })
 
+// Puerto
 app.listen(3000)
